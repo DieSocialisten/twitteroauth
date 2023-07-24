@@ -348,6 +348,24 @@ class TwitterOAuthTest extends TestCase
     }
 
     /**
+     * @vcr testPostStatusesUpdateWithMediaChunkedException.json
+     */
+    public function testPostStatusesUpdateWithMediaChunkedException ()
+    {
+        $this->expectException(
+            \Abraham\TwitterOAuth\TwitterOAuthException::class
+        );
+        $this->expectErrorMessage('Missing "media_id_string"');
+        // Video source http://www.sample-videos.com/
+        $file_path = __DIR__ . '/video.mp4';
+        $result = $this->twitter->upload(
+            'media/upload',
+            ['media' => $file_path, 'media_type' => 'video/mp4'],
+            true
+        );
+    }
+
+    /**
      * @vcr testPostStatusesUpdateUtf8.json
      */
     public function testPostStatusesUpdateUtf8()
