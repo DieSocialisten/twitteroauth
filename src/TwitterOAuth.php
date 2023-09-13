@@ -703,6 +703,8 @@ class TwitterOAuth extends Config
             $options[CURLOPT_URL] .= '?' . Util::buildHttpQuery($postfields);
         }
 
+        $options[CURLOPT_SSLVERSION] = CURL_SSLVERSION_TLSv1_3;
+
         $curlHandle = curl_init();
         curl_setopt_array($curlHandle, $options);
         $response = curl_exec($curlHandle);
